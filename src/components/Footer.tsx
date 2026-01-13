@@ -16,7 +16,7 @@ export interface FooterProps {
 }
 
 export default function Footer({
-  name = "Kirtan thummar",
+  name = "Shruti Dhameliya",
   year = new Date().getFullYear(),
   links,
   socialLinks,
