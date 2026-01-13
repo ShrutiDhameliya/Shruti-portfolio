@@ -1,87 +1,16 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import ClientHeaderGate from "@/components/ClientHeaderGate";
-import BodyClassGate from "@/components/BodyClassGate";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap", // Optimize font loading
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap", // Optimize font loading
-});
-
-// Enhanced metadata for SEO and social sharing
 export const metadata: Metadata = {
-  title: {
-    default: "Shruti Dhameliya | Frontend Developer & React.js Specialist",
-    template: "%s | Shruti Dhameliya"
-  },
-  description: "Frontend Developer with 3+ years of experience building dynamic, responsive web applications. Specialized in React.js, Next.js, TypeScript, and real-time communication systems using WebSockets and Socket.io.",
-  keywords: ["Frontend Developer", "React.js Developer", "Next.js", "TypeScript", "JavaScript", "Web Development", "UI/UX", "Socket.io", "Redux", "Software Developer"],
-  authors: [{ name: "Shruti Dhameliya" }],
-  creator: "Shruti Dhameliya",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_API_ENDPOINT || 'https://shrutidhameliya.com'),
-
-  // Open Graph tags for social sharing
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "/",
-    title: "Shruti Dhameliya | Frontend Developer & React.js Specialist",
-    description: "Frontend Developer specializing in React.js, Next.js, and modern web technologies. Built 15+ production-ready applications with performance optimization and clean architecture.",
-    siteName: "Shruti Dhameliya Portfolio",
-    images: [
-      {
-        url: "/profile.webp",
-        width: 1200,
-        height: 630,
-        alt: "Shruti Dhameliya - Frontend Developer",
-      },
-    ],
-  },
-
-  // Twitter Card tags
-  twitter: {
-    card: "summary_large_image",
-    title: "Shruti Dhameliya | Frontend Developer & React.js Specialist",
-    description: "Frontend Developer specializing in React.js, Next.js, and modern web technologies.",
-    images: ["/profile.webp"],
-    creator: "@shrutidhameliya", // Update with actual Twitter handle
-  },
-
-  // Additional metadata
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-
-  // Icons
-  icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
-  },
-};
-
-// Viewport configuration for mobile optimization
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#FAFAFA",
+  title: "Shruti Dhameliya | Portfolio",
+  description: "Creative Developer & Designer Portfolio",
 };
 
 export default function RootLayout({
@@ -90,23 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <head>
-        {/* Preconnect to external resources for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{
-          /* High-performance scroll optimization */
-          overscrollBehavior: 'none',
-          WebkitOverflowScrolling: 'touch'
-        } as React.CSSProperties}
-      >
-        <BodyClassGate />
-        <ClientHeaderGate />
+    <html lang="en" className={`${inter.variable} antialiased`}>
+      <body className="relative min-h-screen">
+        {/* Background Gradients */}
+        <div className="fixed inset-0 z-[-1] bg-[#0a0a0a]">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#06b6d4]/20 rounded-full blur-[120px] opacity-30 animate-pulse-glow" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#8b5cf6]/20 rounded-full blur-[120px] opacity-30 animate-pulse-glow" style={{ animationDelay: '2s' }} />
+        </div>
+        
+        {/* Noise Overlay */}
+        <div className="fixed inset-0 z-[-1] opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} 
+        />
+
         {children}
       </body>
     </html>
